@@ -86,14 +86,22 @@ public class ConversorPeso extends JFrame {
 		//String objConsulta = (String)((Object) cantMonedaBase).getClass().getSimpleName();
 		
 		if(cantPesoBase <= 0 ) {
-			JOptionPane.showMessageDialog(this, "Ingrese una cantidad vï¿½lida por favor!");
+			JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida por favor!");
 			return;
 		}
 		
-		//Fï¿½rmula: para obtener un resultado aproximado, multiplica el valor de masa por 2.205
+		//Fórmula: para obtener un resultado aproximado, multiplica el valor de masa por 2.205
 		double cantResultado = cantPesoBase * 2.205;
 		
 		jtResultado.setText(String.format("%10.2f", cantResultado));
 	}
 	
+	/**
+	 * Limpia el formulario para volver a convertir otro valor
+	 */
+	void clearInputs() {
+		jtPesoBase.setText("");
+		jtResultado.setText("");
+	}
+
 }
