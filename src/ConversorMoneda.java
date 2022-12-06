@@ -77,8 +77,8 @@ public class ConversorMoneda extends JFrame {
 	}
 
 	/**
-	 * Convierte una cantidad de dinero de peso argentino a dï¿½lares
-	 * a un valor fijo de 300 pesos por dï¿½lar
+	 * Convierte una cantidad de dinero de peso argentino a dólares
+	 * a un valor fijo de 300 pesos por dólar
 	 */
 	void convertir() {
 		
@@ -92,7 +92,7 @@ public class ConversorMoneda extends JFrame {
 		//String objConsulta = (String)((Object) cantMonedaBase).getClass().getSimpleName();
 		
 		if(cantMonedaBase <= 0 ) {
-			JOptionPane.showMessageDialog(this, "Ingrese una cantidad vï¿½lida por favor!");
+			JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida por favor!");
 			return;
 		}
 		
@@ -103,4 +103,14 @@ public class ConversorMoneda extends JFrame {
 		//jtResultado.setText(strResultado);
 		jtResultado.setText(String.format("%10.2f", cantResultado));
 	}
+	
+	/**
+	 * Limpia el formulario para volver a convertir otro monto
+	 */
+	void clearInputs() {
+		jtMonedaBase.setText("");
+		jtResultado.setText("");
+	}
+
+	
 }
