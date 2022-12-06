@@ -70,4 +70,30 @@ public class ConversorPeso extends JFrame {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
+
+	/**
+	 * Convierte una valor peso expresado en Kg a Libras
+	 */
+	void convertir() {
+		
+		if(jtPesoBase.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Ingrese una cantidad a convertir por favor!");
+			return;
+		}
+		
+		double cantPesoBase = Integer.parseInt(jtPesoBase.getText());
+		
+		//String objConsulta = (String)((Object) cantMonedaBase).getClass().getSimpleName();
+		
+		if(cantPesoBase <= 0 ) {
+			JOptionPane.showMessageDialog(this, "Ingrese una cantidad v�lida por favor!");
+			return;
+		}
+		
+		//F�rmula: para obtener un resultado aproximado, multiplica el valor de masa por 2.205
+		double cantResultado = cantPesoBase * 2.205;
+		
+		jtResultado.setText(String.format("%10.2f", cantResultado));
+	}
+	
 }
