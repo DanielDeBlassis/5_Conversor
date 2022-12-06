@@ -20,10 +20,10 @@ public class ConversorTemperatura extends JFrame {
 	
 	public void initialize() {
 		
-		JLabel jpTemperaturaBase = new JLabel("Ingrese ï¿½C");
+		JLabel jpTemperaturaBase = new JLabel("Ingrese °C");
 		jtTemperaturaBase = new JTextField();
 		
-		JLabel jpResultado = new JLabel("Resultado en ï¿½F");
+		JLabel jpResultado = new JLabel("Resultado en °F");
 		jtResultado = new JTextField();
 		
 		
@@ -73,7 +73,7 @@ public class ConversorTemperatura extends JFrame {
 	}
 
 	/**
-	 * Convierte una temperatura de ï¿½C a ï¿½F y la muestra en el contenedor del resultado
+	 * Convierte una temperatura de °C a °F y la muestra en el contenedor del resultado
 	 */
 	void convertir() {
 		
@@ -87,14 +87,23 @@ public class ConversorTemperatura extends JFrame {
 		//String objConsulta = (String)((Object) cantMonedaBase).getClass().getSimpleName();
 		
 		if(cantTemperaturaBase <= 0 ) {
-			JOptionPane.showMessageDialog(this, "Ingrese una cantidad vï¿½lida por favor!");
+			JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida por favor!");
 			return;
 		}
 		
-		//Fï¿½rmula (0 ï¿½C ï¿½ 9/5) + 32 = 32 ï¿½F
+		//Fórmula (0 °C × 9/5) + 32 = 32 °F
 		double cantResultado = (cantTemperaturaBase * 9 / 5) + 32;
 		
 		jtResultado.setText(String.format("%10.2f", cantResultado));
 	}
+	
+	/**
+	 * Limpia el formulario para volver a convertir otro valor
+	 */
+	void clearInputs() {
+		jtTemperaturaBase.setText("");
+		jtResultado.setText("");
+	}
+
 	
 }
