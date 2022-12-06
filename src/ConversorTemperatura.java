@@ -72,4 +72,29 @@ public class ConversorTemperatura extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Convierte una temperatura de �C a �F y la muestra en el contenedor del resultado
+	 */
+	void convertir() {
+		
+		if(jtTemperaturaBase.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Ingrese una cantidad a convertir por favor!");
+			return;
+		}
+		
+		double cantTemperaturaBase = Integer.parseInt(jtTemperaturaBase.getText());
+		
+		//String objConsulta = (String)((Object) cantMonedaBase).getClass().getSimpleName();
+		
+		if(cantTemperaturaBase <= 0 ) {
+			JOptionPane.showMessageDialog(this, "Ingrese una cantidad v�lida por favor!");
+			return;
+		}
+		
+		//F�rmula (0 �C � 9/5) + 32 = 32 �F
+		double cantResultado = (cantTemperaturaBase * 9 / 5) + 32;
+		
+		jtResultado.setText(String.format("%10.2f", cantResultado));
+	}
+	
 }
