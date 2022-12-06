@@ -76,4 +76,31 @@ public class ConversorMoneda extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Convierte una cantidad de dinero de peso argentino a d�lares
+	 * a un valor fijo de 300 pesos por d�lar
+	 */
+	void convertir() {
+		
+		if(jtMonedaBase.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Ingrese una cantidad a convertir por favor!");
+			return;
+		}
+		
+		double cantMonedaBase = Integer.parseInt(jtMonedaBase.getText());
+		
+		//String objConsulta = (String)((Object) cantMonedaBase).getClass().getSimpleName();
+		
+		if(cantMonedaBase <= 0 ) {
+			JOptionPane.showMessageDialog(this, "Ingrese una cantidad v�lida por favor!");
+			return;
+		}
+		
+		
+		double cantResultado = cantMonedaBase / 300;
+		//String strResultado = String.valueOf(cantResultado);
+		
+		//jtResultado.setText(strResultado);
+		jtResultado.setText(String.format("%10.2f", cantResultado));
+	}
 }
