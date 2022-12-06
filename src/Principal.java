@@ -25,7 +25,7 @@ public class Principal {
 
 	    frame.add(panel);
 
-	    JLabel lbl = new JLabel("Selecciona conversiï¿½n a realizar y presiona el botï¿½n");
+	    JLabel lbl = new JLabel("Selecciona conversión a realizar y presiona el botón");
 	    lbl.setAlignmentX(Component.CENTER_ALIGNMENT);
 	    //lbl.setVisible(true); // Not needed
 
@@ -46,6 +46,25 @@ public class Principal {
 
 	    frame.setVisible(true); // added code
 	    
+		btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				eleccion = (String) cb.getSelectedItem();
+				//elegir(eleccion);
+				if(eleccion == "Conversor de Monedas") {
+					System.out.println(true);
+					
+					ConversorMoneda conversorMoneda = new ConversorMoneda();
+					conversorMoneda.initialize();
+					
+				}else if(eleccion == "Conversor de Temperatura"){
+					ConversorTemperatura conversorTemperatura = new ConversorTemperatura();
+					conversorTemperatura.initialize();
+				}else if(eleccion == "Conversor de Peso"){
+					ConversorPeso conversorPeso = new ConversorPeso();
+					conversorPeso.initialize();
+				}
+			}
+		});
 	}
 	
 	
