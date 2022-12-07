@@ -24,6 +24,12 @@ public class ConversorMoneda extends JFrame {
 	JTextField jtMonedaBase;
 	JTextField jtResultado;
 	
+	public ConversorMoneda(String title) {
+		super(title);
+	}
+	public ConversorMoneda() {
+	}
+	
 	public void initialize() {
 		
 		JLabel jpMonedaBase = new JLabel("Ingrese ARS$");
