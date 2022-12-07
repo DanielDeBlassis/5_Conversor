@@ -13,23 +13,33 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 
 public class ConversorMoneda extends JFrame {
 	
-	/**
-	 * 
-	 */
+//////
+//////ATRIBUTOS//////
+//////
 	private static final long serialVersionUID = 1L;
+	
 	JTextField jtMonedaBase;
 	JTextField jtResultado;
 	
+//////
+//////CONSTRUCTORES//////
+//////
 	public ConversorMoneda(String title) {
 		super(title);
 	}
 	public ConversorMoneda() {
 	}
 	
+//////
+//////M�TODOS//////
+//////
+	
+	/**
+	 * Inicializa la ventana con sus componentes
+	 * */
 	public void initialize() {
 		
 		JLabel jpMonedaBase = new JLabel("Ingrese valor a convertir");
