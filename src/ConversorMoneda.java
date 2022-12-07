@@ -34,7 +34,7 @@ public class ConversorMoneda extends JFrame {
 	}
 	
 //////
-//////Mï¿½TODOS//////
+//////MÉTODOS//////
 //////
 	
 	/**
@@ -45,7 +45,7 @@ public class ConversorMoneda extends JFrame {
 		JLabel jpMonedaBase = new JLabel("Ingrese valor a convertir");
 		jtMonedaBase = new JTextField();
 		
-		JLabel jpResultado = new JLabel("Resultado de la conversiï¿½n");
+		JLabel jpResultado = new JLabel("Resultado de la conversión");
 		jtResultado = new JTextField();
 		jtResultado.setEditable(false);
 		
@@ -53,18 +53,18 @@ public class ConversorMoneda extends JFrame {
 		JPanel jpForm = new JPanel();
 		jpForm.setLayout(new GridLayout(5, 2, 10, 10));
 		jpForm.setBackground(new java.awt.Color(175, 178, 203));
-		//jpForm.setBorder(BorderFactory.createTitledBorder("Seleccione tipo de conversiï¿½n"));
+		//jpForm.setBorder(BorderFactory.createTitledBorder("Seleccione tipo de conversión"));
 		jpForm.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		
 		
 
-		String[] tiposConversion = { "Peso Argentino a Dï¿½lar", "Dï¿½lar a Peso Argentino", "Peso Argentino a Euro", "Euro a Peso Argentino", "Peso Argentino a Libra", "Libra a Peso Argentino", "Peso Argentino a Yen Japonï¿½s", "Yen Japonï¿½s a Peso Argentino", "Peso Argentino a Won Surcoreano", "Won Surcoreano a Peso Argentino"};
+		String[] tiposConversion = { "Peso Argentino a Dólar", "Dólar a Peso Argentino", "Peso Argentino a Euro", "Euro a Peso Argentino", "Peso Argentino a Libra", "Libra a Peso Argentino", "Peso Argentino a Yen Japonés", "Yen Japonés a Peso Argentino", "Peso Argentino a Won Surcoreano", "Won Surcoreano a Peso Argentino"};
 		final JComboBox<String> operacion = new JComboBox<String>(tiposConversion);
 		
 		operacion.setMaximumSize(operacion.getPreferredSize()); // added code
 	    operacion.setAlignmentX(Component.TOP_ALIGNMENT);// added code
 	    
-	    JLabel lbl = new JLabel("Seleccione la operaciï¿½n a realizar");
+	    JLabel lbl = new JLabel("Seleccione la operación a realizar");
 	    lbl.setAlignmentX(Component.TOP_ALIGNMENT);
 	    
 	    jpForm.add(lbl);
@@ -73,13 +73,11 @@ public class ConversorMoneda extends JFrame {
 		JButton btnConvertir = new JButton("Convertir");
 		btnConvertir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				convertir();
+				String operation = (String) operacion.getSelectedItem();
+				convertir(operation);
 			}
 		});
 		
-		
-		JPanel jpForm = new JPanel();
-		jpForm.setLayout(new GridLayout(5, 2, 10, 5));
 		
 		jpForm.add(jpMonedaBase);
 		jpForm.add(jtMonedaBase);
@@ -96,11 +94,14 @@ public class ConversorMoneda extends JFrame {
 			}
 		});
 		
+		
+		
 		JPanel jpMainPanel = new JPanel();
 		jpMainPanel.setLayout(new BorderLayout(10, 10));
+		jpMainPanel.setBackground(new java.awt.Color(175, 178, 203));
+		jpMainPanel.setBorder(BorderFactory.createMatteBorder(30, 24, 24, 24, new java.awt.Color(227, 229, 244)));
 		
-		jpMainPanel.add(jpForm, BorderLayout.NORTH);		
-		jpMainPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 20, 50));
+		jpMainPanel.add(jpForm, BorderLayout.NORTH);
 		
 		jpMainPanel.add(btnClear, BorderLayout.SOUTH);
 		
@@ -111,36 +112,77 @@ public class ConversorMoneda extends JFrame {
 		
 		setSize(500, 400);
 		setMinimumSize(new Dimension(450, 400));
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setVisible(true);
 	}
 
-	/**
-	 * Convierte una cantidad de dinero de peso argentino a dólares
-	 * a un valor fijo de 300 pesos por dólar
+		/**
+	 * Convierte una cantidad de dinero según la opción seleccionada
+	 * @param op parámetro de tipo String que corresponde a la opción elegida
 	 */
-	void convertir() {
+	void convertir(String op) {
 		
-		if(jtMonedaBase.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Ingrese una cantidad a convertir por favor!");
+		if(SoloNumeros.contieneSoloNumeros(jtMonedaBase.getText())) {
+			double cantMonedaBase = Integer.parseInt(jtMonedaBase.getText());
+			
+			if(cantMonedaBase <= 0 ) {
+				JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida por favor!");
+				return;
+			}
+			
+			double cantResultado;
+			
+			switch(op) {
+			case "Peso Argentino a Dólar":
+				cantResultado = cantMonedaBase / 300;
+				jtResultado.setText(String.format("%10.2f", cantResultado));
+				break;
+			case "Dólar a Peso Argentino":
+				cantResultado = cantMonedaBase * 300;
+				jtResultado.setText(String.format("%10.2f", cantResultado));
+				break;
+			case "Peso Argentino a Euro":
+				cantResultado = cantMonedaBase / 200;
+				jtResultado.setText(String.format("%10.2f", cantResultado));
+				break;
+			case "Euro a Peso Argentino":
+				cantResultado = cantMonedaBase * 200;
+				jtResultado.setText(String.format("%10.2f", cantResultado));
+				break;
+			case "Peso Argentino a Libra":
+				cantResultado = cantMonedaBase / 210;
+				jtResultado.setText(String.format("%10.2f", cantResultado));
+				break;
+			case "Libra a Peso Argentino":
+				cantResultado = cantMonedaBase * 210;
+				jtResultado.setText(String.format("%10.2f", cantResultado));
+				break;
+			case "Peso Argentino a Yen Japonés":
+				cantResultado = cantMonedaBase / 1.5;
+				jtResultado.setText(String.format("%10.2f", cantResultado));
+				break;
+			case "Yen Japonés a Peso Argentino":
+				cantResultado = cantMonedaBase * 1.5;
+				jtResultado.setText(String.format("%10.2f", cantResultado));
+				break;
+			case "Peso Argentino a Won Surcoreano":
+				cantResultado = cantMonedaBase / 0.2;
+				jtResultado.setText(String.format("%10.2f", cantResultado));
+				break;
+			case "Won Surcoreano a Peso Argentino":
+				cantResultado = cantMonedaBase * 0.2;
+				jtResultado.setText(String.format("%10.2f", cantResultado));
+				break;
+				default:
+					System.out.println("Error! Vuelve a intentarlo.");
+					break;
+			}
+			
+		}else {
+			JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida a convertir por favor!");
 			return;
 		}
 		
-		double cantMonedaBase = Integer.parseInt(jtMonedaBase.getText());
-		
-		//String objConsulta = (String)((Object) cantMonedaBase).getClass().getSimpleName();
-		
-		if(cantMonedaBase <= 0 ) {
-			JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida por favor!");
-			return;
-		}
-		
-		
-		double cantResultado = cantMonedaBase / 300;
-		//String strResultado = String.valueOf(cantResultado);
-		
-		//jtResultado.setText(strResultado);
-		jtResultado.setText(String.format("%10.2f", cantResultado));
 	}
 	
 	/**
