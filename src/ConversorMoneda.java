@@ -32,10 +32,10 @@ public class ConversorMoneda extends JFrame {
 	
 	public void initialize() {
 		
-		JLabel jpMonedaBase = new JLabel("Ingrese ARS$");
+		JLabel jpMonedaBase = new JLabel("Ingrese valor a convertir");
 		jtMonedaBase = new JTextField();
 		
-		JLabel jpResultado = new JLabel("Resultado en USD$");
+		JLabel jpResultado = new JLabel("Resultado de la conversi�n");
 		jtResultado = new JTextField();
 		
 		
