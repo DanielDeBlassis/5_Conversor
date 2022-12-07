@@ -37,6 +37,7 @@ public class ConversorMoneda extends JFrame {
 		
 		JLabel jpResultado = new JLabel("Resultado de la conversi�n");
 		jtResultado = new JTextField();
+		jtResultado.setEditable(false);
 		
 		
 		
