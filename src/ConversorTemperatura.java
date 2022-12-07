@@ -11,13 +11,33 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 
 public class ConversorTemperatura extends JFrame {
 	
+//////
+//////ATRIBUTOS//////
+//////
+	private static final long serialVersionUID = 1L;
 	JTextField jtTemperaturaBase;
 	JTextField jtResultado;
 	
+//////
+//////CONSTRUCTOR//////
+//////
+	public ConversorTemperatura(String title) {
+		super(title);
+	}
+	public ConversorTemperatura() {
+		
+	}
+	
+//////
+//////MÉTODOS//////
+//////
+	
+	/**
+	 * Inicializa la ventana con sus componentes
+	 * */
 	public void initialize() {
 		
 		JLabel jpTemperaturaBase = new JLabel("Ingrese °C");
@@ -25,6 +45,7 @@ public class ConversorTemperatura extends JFrame {
 		
 		JLabel jpResultado = new JLabel("Resultado en °F");
 		jtResultado = new JTextField();
+		jtResultado.setEditable(false);
 		
 		
 		JButton btnConvertir = new JButton("Convertir");
@@ -37,6 +58,8 @@ public class ConversorTemperatura extends JFrame {
 		
 		JPanel jpForm = new JPanel();
 		jpForm.setLayout(new GridLayout(5, 2, 10, 5));
+		jpForm.setBackground(new java.awt.Color(175, 178, 203));
+		jpForm.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		
 		jpForm.add(jpTemperaturaBase);
 		jpForm.add(jtTemperaturaBase);
@@ -55,46 +78,46 @@ public class ConversorTemperatura extends JFrame {
 		
 		JPanel jpMainPanel = new JPanel();
 		jpMainPanel.setLayout(new BorderLayout(10, 10));
+		jpMainPanel.setBackground(new java.awt.Color(175, 178, 203));
+		jpMainPanel.setBorder(BorderFactory.createMatteBorder(30, 24, 24, 24, new java.awt.Color(227, 229, 244)));
 		
-		jpMainPanel.add(jpForm, BorderLayout.NORTH);		
-		jpMainPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 20, 50));
-		
+		jpMainPanel.add(jpForm, BorderLayout.NORTH);
 		jpMainPanel.add(btnClear, BorderLayout.SOUTH);
 		
 		add(jpMainPanel);
 		
 		
-		
-		
 		setSize(500, 400);
 		setMinimumSize(new Dimension(450, 400));
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setVisible(true);
 	}
 
 	/**
 	 * Convierte una temperatura de °C a °F y la muestra en el contenedor del resultado
 	 */
-	void convertir() {
+		void convertir() {
 		
-		if(jtTemperaturaBase.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Ingrese una cantidad a convertir por favor!");
+		if(SoloNumeros.contieneSoloNumeros(jtTemperaturaBase.getText())) {
+			double cantTemperaturaBase = Integer.parseInt(jtTemperaturaBase.getText());
+			
+			//String objConsulta = (String)((Object) cantMonedaBase).getClass().getSimpleName();
+			
+			if(cantTemperaturaBase <= 0 ) {
+				JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida por favor!");
+				return;
+			}
+			
+			//Fórmula (0 °C × 9/5) + 32 = 32 °F
+			double cantResultado = (cantTemperaturaBase * 9 / 5) + 32;
+			
+			jtResultado.setText(String.format("%10.2f", cantResultado));
+		}else {
+			JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida a convertir por favor!");
 			return;
 		}
 		
-		double cantTemperaturaBase = Integer.parseInt(jtTemperaturaBase.getText());
 		
-		//String objConsulta = (String)((Object) cantMonedaBase).getClass().getSimpleName();
-		
-		if(cantTemperaturaBase <= 0 ) {
-			JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida por favor!");
-			return;
-		}
-		
-		//Fórmula (0 °C × 9/5) + 32 = 32 °F
-		double cantResultado = (cantTemperaturaBase * 9 / 5) + 32;
-		
-		jtResultado.setText(String.format("%10.2f", cantResultado));
 	}
 	
 	/**
