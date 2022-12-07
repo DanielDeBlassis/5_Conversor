@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -6,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -31,6 +33,21 @@ public class ConversorMoneda extends JFrame {
 		jtResultado = new JTextField();
 		
 		
+		
+		
+
+		String[] tiposConversion = { "Peso Argentino a D�lar", "D�lar a Peso Argentino", "Peso Argentino a Euro", "Euro a Peso Argentino", "Peso Argentino a Libra", "Libra a Peso Argentino", "Peso Argentino a Yen Japon�s", "Yen Japon�s a Peso Argentino", "Peso Argentino a Won Surcoreano", "Won Surcoreano a Peso Argentino"};
+		final JComboBox<String> operacion = new JComboBox<String>(tiposConversion);
+		
+		operacion.setMaximumSize(operacion.getPreferredSize()); // added code
+	    operacion.setAlignmentX(Component.TOP_ALIGNMENT);// added code
+	    
+	    JLabel lbl = new JLabel("Seleccione la operaci�n a realizar");
+	    lbl.setAlignmentX(Component.TOP_ALIGNMENT);
+	    
+	    jpForm.add(lbl);
+	    jpForm.add(operacion);
+	    
 		JButton btnConvertir = new JButton("Convertir");
 		btnConvertir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
