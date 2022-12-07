@@ -11,12 +11,34 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 
 public class ConversorPeso extends JFrame {
+
+//////
+//////ATRIBUTOS//////
+//////
+	private static final long serialVersionUID = 1L;
 	JTextField jtPesoBase;
 	JTextField jtResultado;
 	
+	
+//////
+//////CONSTRUCTOR//////
+//////
+	public ConversorPeso(String title) {
+		super(title);
+	}
+	public ConversorPeso() {
+		
+	}
+	
+//////
+//////MÉTODOS//////
+//////
+	
+	/**
+	 * Inicializa la ventana con sus componentes
+	 * */
 	public void initialize() {
 		
 		JLabel jpTemperaturaBase = new JLabel("Ingrese peso en Kilogramos");
@@ -24,6 +46,7 @@ public class ConversorPeso extends JFrame {
 		
 		JLabel jpResultado = new JLabel("Resultado en Libras");
 		jtResultado = new JTextField();
+		jtResultado.setEditable(false);
 		
 		
 		JButton btnConvertir = new JButton("Convertir");
@@ -36,6 +59,8 @@ public class ConversorPeso extends JFrame {
 		
 		JPanel jpForm = new JPanel();
 		jpForm.setLayout(new GridLayout(5, 2, 10, 5));
+		jpForm.setBackground(new java.awt.Color(175, 178, 203));
+		jpForm.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		
 		jpForm.add(jpTemperaturaBase);
 		jpForm.add(jtPesoBase);
@@ -54,10 +79,10 @@ public class ConversorPeso extends JFrame {
 		
 		JPanel jpMainPanel = new JPanel();
 		jpMainPanel.setLayout(new BorderLayout(10, 10));
+		jpMainPanel.setBackground(new java.awt.Color(175, 178, 203));
+		jpMainPanel.setBorder(BorderFactory.createMatteBorder(30, 24, 24, 24, new java.awt.Color(227, 229, 244)));
 		
-		jpMainPanel.add(jpForm, BorderLayout.NORTH);		
-		jpMainPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 20, 50));
-		
+		jpMainPanel.add(jpForm, BorderLayout.NORTH);
 		jpMainPanel.add(btnClear, BorderLayout.SOUTH);
 		
 		add(jpMainPanel);
@@ -67,7 +92,7 @@ public class ConversorPeso extends JFrame {
 		
 		setSize(500, 400);
 		setMinimumSize(new Dimension(450, 400));
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setVisible(true);
 	}
 
@@ -76,24 +101,26 @@ public class ConversorPeso extends JFrame {
 	 */
 	void convertir() {
 		
-		if(jtPesoBase.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Ingrese una cantidad a convertir por favor!");
+		if(SoloNumeros.contieneSoloNumeros(jtPesoBase.getText())) {
+
+			double cantPesoBase = Integer.parseInt(jtPesoBase.getText());
+			
+			//String objConsulta = (String)((Object) cantMonedaBase).getClass().getSimpleName();
+			
+			if(cantPesoBase <= 0 ) {
+				JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida por favor!");
+				return;
+			}
+			
+			//Fórmula: para obtener un resultado aproximado, multiplica el valor de masa por 2.205
+			double cantResultado = cantPesoBase * 2.205;
+			
+			jtResultado.setText(String.format("%10.2f", cantResultado));
+		}else {
+			JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida a convertir por favor!");
 			return;
 		}
 		
-		double cantPesoBase = Integer.parseInt(jtPesoBase.getText());
-		
-		//String objConsulta = (String)((Object) cantMonedaBase).getClass().getSimpleName();
-		
-		if(cantPesoBase <= 0 ) {
-			JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida por favor!");
-			return;
-		}
-		
-		//Fórmula: para obtener un resultado aproximado, multiplica el valor de masa por 2.205
-		double cantResultado = cantPesoBase * 2.205;
-		
-		jtResultado.setText(String.format("%10.2f", cantResultado));
 	}
 	
 	/**
