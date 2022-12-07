@@ -50,6 +50,11 @@ public class ConversorMoneda extends JFrame {
 		jtResultado.setEditable(false);
 		
 		
+		JPanel jpForm = new JPanel();
+		jpForm.setLayout(new GridLayout(5, 2, 10, 10));
+		jpForm.setBackground(new java.awt.Color(175, 178, 203));
+		//jpForm.setBorder(BorderFactory.createTitledBorder("Seleccione tipo de conversi�n"));
+		jpForm.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		
 		
 
